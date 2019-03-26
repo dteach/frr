@@ -470,6 +470,8 @@ AC_ARG_ENABLE([logfile_mask],
   AS_HELP_STRING([--enable-logfile-mask=ARG], [set mask for log files]))
 AC_ARG_ENABLE([shell_access],
   AS_HELP_STRING([--enable-shell-access], [Allow users to access shell/telnet/ssh]))
+AC_ARG_ENABLE([privileged_vty],
+  AS_HELP_STRING([--enable-privileged-vty], [Allow daemons to bind vty to well-known ports]))
 AC_ARG_ENABLE([realms],
   AS_HELP_STRING([--enable-realms], [enable REALMS support under Linux]))
 AC_ARG_ENABLE([rtadv],
@@ -591,6 +593,10 @@ AC_DEFINE_UNQUOTED([DFLT_NAME], ["$DFLT_NAME"], [Name of the configuration defau
 
 if test "${enable_shell_access}" = "yes"; then
    AC_DEFINE([HAVE_SHELL_ACCESS], [1], [Allow user to use ssh/telnet/bash, be aware this is considered insecure])
+fi
+
+if test "${enable_privileged_vty}" = "yes"; then
+  AC_DEFINE([HAVE_PRIV_VTY],,Allow daemons to bind vty to well-known ports)
 fi
 
 AM_CONDITIONAL([FPM], [test "x$enable_fpm" = "xyes"])
